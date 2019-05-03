@@ -3,7 +3,6 @@
 This is a simple Rack server running a simple Tic Tac Toe game made with Ruby. 
 
 Play it here:
-
 https://tic-tac-toe-ruby.herokuapp.com/
 
 
