@@ -1,0 +1,46 @@
+<div style="display:flex; justify-content:center; align-items:center; height: 60%">
+
+    <table>
+
+        <tr>
+            <% for x in 0..2 do  %>
+            <% if @game.board[x] == '_' && !@game.winner %>
+            <th><a href=<%="?play=#{x}"%>><%= @game.board[x] %></a></th>
+            <% else %>
+            <th><%= @game.board[x] %></th>
+            <% end %>
+            <% end %>
+        </tr>
+
+        <tr>
+            <% for x in 3..5 do  %>
+            <% if @game.board[x] == '_' && !@game.winner %>
+            <th><a href=<%="?play=#{x}"%>><%= @game.board[x] %></a></th>
+            <% else %>
+            <th><%= @game.board[x] %></th>
+            <% end %>
+            <% end %>
+        </tr>
+
+        <tr>
+            <% for x in 6..9 do  %>
+            <% if @game.board[x] == '_' && !@game.winner %>
+            <th><a href=<%="?play=#{x}"%>><%= @game.board[x] %></a></th>
+            <% else %>
+            <th><%= @game.board[x] %></th>
+            <% end %>
+            <% end %>
+        </tr>
+
+    </table>
+</div>
+
+<div style="display:flex; justify-content:center; align-items:center;">
+    <% if @game.winner %>
+    <%="Player #{@game.winner} has won!" %>
+    <a href="?reset=true">Play again?</a>
+    <% elsif @game.draw %>
+    <%="Draw! " %>
+    <a href="?reset=true">Play again?</a>
+    <% end %>
+</div>

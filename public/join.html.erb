@@ -1,0 +1,19 @@
+<style>
+  html * {
+    font-size: 50px;
+  }
+</style>
+
+<div style="display:flex; justify-content:center; align-items:center; height: 10%">Tic Tac Toe!</div>
+
+
+  <div style="display:flex; justify-content:center; align-items:center;">
+    Current Sessions:
+    <% TicTacToe.games.each do |session| %>
+      <a href=<%="?join_game=#{session.__id__}"%>> <%= session.__id__ %></a><br>
+    <% end %>
+  </div>
+
+
+
+
