@@ -13,7 +13,7 @@ class Application
     res = Rack::Response.new
     req = Rack::Request.new(env)
 
-    template = File.read('/Users/alexgyurov/Development/tic-tac-toe-server/public/index.html.erb')
+    template = File.read('./public/index.html.erb')
 
     if req.params['game'] && req.params['play']
       play = req.params['play']
