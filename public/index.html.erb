@@ -6,49 +6,74 @@
 
 <div style="display:flex; justify-content:center; align-items:center; height: 10%">Tic Tac Toe!</div>
 
-<div style="display:flex; justify-content:center; align-items:center; height: 60%">
 
-  <table>
 
-    <tr>
-    <% for x in 0..2 do  %>
-      <% if @board[x] == '_' && !@winner %>
-        <th><a href=<%="?play=#{x}"%>><%= @board[x] %></a></th>
-      <% else %>
-        <th><%= @board[x] %></th>
-      <% end %>
+<% if req.params['game'] == nil%>
+
+  <div style="display:flex; justify-content:center; align-items:center;">
+    <a href="?new_game=true">New Game</a>
+  </div>
+
+  <br><br>
+  <div style="font-size:35px !important;">
+    Current Sessions:
+    <% TicTacToe.games.each do |session| %>
+      <br><a style="font-size:35px !important;" href=<%="?game=#{session.__id__}"%>> <%= session.__id__ %></a>
     <% end %>
-    </tr>
+  </div>
 
-    <tr>
-      <% for x in 3..5 do  %>
-        <% if @board[x] == '_' && !@winner %>
-          <th><a href=<%="?play=#{x}"%>><%= @board[x] %></a></th>
-        <% else %>
-          <th><%= @board[x] %></th>
+<% else %>
+
+  <div style="display:flex; justify-content:center; align-items:center; height: 60%">
+
+    <table>
+
+      <tr>
+        <% for x in 0..2 do  %>
+          <% if get_game(req).board[x] == '_' && !get_game(req).winner %>
+            <th><a href=<%="?game=#{get_game(req).__id__}&play=#{x}"%>><%= get_game(req).board[x] %></a></th>
+          <% else %>
+            <th><%= get_game(req).board[x] %></th>
+          <% end %>
         <% end %>
-      <% end %>
-    </tr>
+      </tr>
 
-    <tr>
-      <% for x in 6..9 do  %>
-        <% if @board[x] == '_' && !@winner %>
-          <th><a href=<%="?play=#{x}"%>><%= @board[x] %></a></th>
-        <% else %>
-          <th><%= @board[x] %></th>
+      <tr>
+        <% for x in 3..5 do  %>
+          <% if get_game(req).board[x] == '_' && !get_game(req).winner %>
+            <th><a href=<%="?game=#{get_game(req).__id__}&play=#{x}"%>><%= get_game(req).board[x] %></a></th>
+          <% else %>
+            <th><%= get_game(req).board[x] %></th>
+          <% end %>
         <% end %>
-      <% end %>
-    </tr>
+      </tr>
 
-  </table>
-</div>
+      <tr>
+        <% for x in 6..9 do  %>
+          <% if get_game(req).board[x] == '_' && !get_game(req).winner %>
+            <th><a href=<%="?game=#{get_game(req).__id__}&play=#{x}"%>><%= get_game(req).board[x] %></a></th>
+          <% else %>
+            <th><%= get_game(req).board[x] %></th>
+          <% end %>
+        <% end %>
+      </tr>
 
-<div style="display:flex; justify-content:center; align-items:center;">
-<% if @winner %>
-  <%="Player #{@winner} has won!" %>
-  <a href="?reset=true">Play again?</a>
-<% elsif @draw %>
-  <%="Draw! " %>
-  <a href="?reset=true">Play again?</a>
+    </table>
+  </div>
+
+  <div style="display:flex; justify-content:center; align-items:center;">
+    <% if get_game(req).winner %>
+      <%="Player #{get_game(req).winner} has won!" %>
+      <a href="?reset=true">Play again?</a>
+    <% elsif get_game(req).draw %>
+      <%="Draw! " %>
+      <a href="?reset=true">Play again?</a>
+    <% end %>
+  </div>
+
+  <%="Connected: #{get_game(req).__id__}" %>
+
 <% end %>
-</div>
+
+
+
