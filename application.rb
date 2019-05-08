@@ -22,8 +22,6 @@ class Application
     end
 
     if req.params['new_game']
-      template = File.read('/Users/alexgyurov/Development/tic-tac-toe-server/public/index.html.erb')
-
       new_game = TicTacToe.new()
       req.session['game_session'] = new_game
       res.redirect("?game=#{new_game.__id__}")
